@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}{{ category.name }} - Subkategoriyalar{% endblock %}
+{% block content %}
+    <a href="{% url 'category-list' %}" class="btn btn-link ps-0">&larr; Kategoriyalar</a>
+    <h1 class="mb-4">{{ category.name }}</h1>
+    <div class="row g-4">
+        {% for sub in subcategories %}
+            <div class="col-md-3">
+                <div class="card p-3 text-center h-100">
+                    <h5>{{ sub.name }}</h5>
+                    <a href="{% url 'product-list' sub.id %}" class="btn btn-outline-dark btn-sm mt-2">Productlar</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>Bu kategoriyada subkategoriyalar yo'q.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

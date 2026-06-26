@@ -1,1 +1,87 @@
-<h1>Ordered items</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Placed Successfully</title>
+</head>
+<body>
+
+    <div>
+        <!-- Success Message -->
+        <h1>Thank you for your order!</h1>
+        <p>Your order has been placed and is currently being processed.</p>
+    </div>
+
+    {% if latest_order %}
+    <!-- Latest Order Details -->
+    <div>
+        <h2>Latest Order Details</h2>
+        <p>Order ID: #{{ latest_order.id }}</p>
+        <p>Placed on: {{ latest_order.created_at|date:"F j, Y, g:i a" }}</p>
+        <p>Status: {{ latest_order.get_status_display }}</p>
+
+        <h3>Ordered Items:</h3>
+        <ul>
+            {% for item in latest_order.items.all %}
+            <li>
+                <strong>{{ item.product.name }}</strong><br>
+                Quantity: {{ item.quantity }}<br>
+                Price: ${{ item.price_at_purchase }} each (Subtotal: ${{ item.get_subtotal|floatformat:2 }})
+            </li>
+            {% empty %}
+            <li>No items found in this order.</li>
+            {% endfor %}
+        </ul>
+
+        <p><strong>Total Charged: ${{ latest_order_total|floatformat:2 }}</strong></p>
+    </div>
+    {% endif %}
+
+    <hr>
+
+    <!-- Detailed Order History -->
+    <div>
+        <h2>Your Order History</h2>
+        
+        {% if orders.count > 1 %}
+        <ul>
+            {% for order in orders %}
+                {% if order != latest_order %}
+                <li>
+                    <h3>Order #{{ order.id }}</h3>
+                    <p>Date: {{ order.created_at|date:"F j, Y, g:i a" }}</p>
+                    <p>Status: {{ order.get_status_display }}</p>
+                    
+                    <h4>Items in this order:</h4>
+                    <ul>
+                        {% for item in order.items.all %}
+                        <li>
+                            <strong>{{ item.product.name }}</strong><br>
+                            Quantity: {{ item.quantity }}<br>
+                            Price at Purchase: ${{ item.price_at_purchase }} each (Subtotal: ${{ item.get_subtotal|floatformat:2 }})
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    
+                    <!-- Call the model helper method to get total price of old order -->
+                    <p><strong>Order Total: ${{ order.get_total_price|floatformat:2 }}</strong></p>
+                    <hr style="width: 50%; margin-left: 0;">
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No previous orders found.</p>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <!-- Call to Action -->
+    <div>
+        <p><a href="/">Continue Shopping</a></p>
+    </div>
+
+</body>
+</html>

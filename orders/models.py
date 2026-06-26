@@ -26,6 +26,10 @@ class Order(models.Model):
     def __str__(self):
         return f"Order {self.id} by {self.user.username}"
     
+    def get_total_price(self):
+        return sum(item.quantity * item.price_at_purchase for item in self.items.all())
+
+    
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -34,6 +38,10 @@ class OrderItem(models.Model):
     
     def __str__(self):
         return f"{self.quantity} x {self.product} - {self.order.id}"
+    
+    def get_subtotal(self):
+        """Calculates the subtotal for this specific order item."""
+        return self.quantity * self.price_at_purchase
     
 
 
