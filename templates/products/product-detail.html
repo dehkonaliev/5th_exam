@@ -298,9 +298,11 @@
                     </div>
 
                     <!-- Review Content -->
-                    <p class="text-slate-600 text-sm leading-relaxed pl-1">
-                        {{ review.comment }}
-                    </p>
+                    {% if review.comment %}
+                        <p class="text-slate-600 text-sm leading-relaxed pl-1">
+                            {{ review.comment }}
+                        </p>
+                    {% endif %}
                 </div>
                 {% empty %}
                 <!-- Modern Empty Review State -->
