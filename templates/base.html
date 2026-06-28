@@ -246,10 +246,10 @@
                                 </button>
                             </form>
                             {% else %}
-                            <a href="#"
+                            <a href="{% url 'sign-in' %}"
                                 class="flex items-center gap-2 px-4 py-2 text-slate-600 hover:bg-slate-50 hover:text-brand-600 font-semibold"><i
                                     data-lucide="log-in" class="w-4 h-4"></i> Log In</a>
-                            <a href="#"
+                            <a href="{% url 'sign-up' %}"
                                 class="flex items-center gap-2 px-4 py-2 text-slate-600 hover:bg-slate-50 hover:text-brand-600"><i
                                     data-lucide="user-plus" class="w-4 h-4"></i> Register</a>
                             {% endif %}
@@ -374,10 +374,10 @@
                     </form>
                     {% else %}
                     <div class="grid grid-cols-2 gap-3">
-                        <a href="#"
+                        <a href="{% url 'sign-in' %}"
                             class="text-center border border-slate-200 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50 transition">Log
                             In</a>
-                        <a href="#"
+                        <a href="{% url 'sign-up' %}"
                             class="text-center bg-brand-600 text-white py-2.5 rounded-lg text-sm font-semibold hover:bg-brand-700 transition">Sign
                             Up</a>
                     </div>
