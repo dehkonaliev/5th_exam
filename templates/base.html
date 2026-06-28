@@ -162,16 +162,15 @@
                         </div>
                     </div>
 
-                    <a href="#" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition">New Arrivals</a>
-                    <a href="#" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition">Special Deals</a>
                 </nav>
 
                 <!-- Search Bar (Desktop) -->
                 <div class="hidden lg:flex flex-1 max-w-md mx-4">
-                    <form action="#" method="GET" class="w-full relative">
+                    <form action="{% url 'search' %}" method="POST" class="w-full relative">
+                        {% csrf_token %}
                         <input 
                             type="text" 
-                            name="search" 
+                            name="search_query" 
                             placeholder="Search products, categories..." 
                             class="w-full py-2 pl-10 pr-4 rounded-xl border border-slate-200 bg-slate-50/70 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent text-sm transition"
                         >
@@ -348,11 +347,6 @@
                                 </div>
                             {% endif %}
                         </div>
-                    </div>
-
-                    <div class="border-t border-slate-100 pt-6 space-y-3">
-                        <a href="#" class="block text-base font-semibold text-slate-700 hover:text-brand-600">New Arrivals</a>
-                        <a href="#" class="block text-base font-semibold text-slate-700 hover:text-brand-600">Special Deals</a>
                     </div>
                 </div>
 

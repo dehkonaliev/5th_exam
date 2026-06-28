@@ -21,6 +21,13 @@ def add_saved(request, pk):
     
     return redirect('saved')
 
+
+class HomeView(View):
+    def get(self, request):
+        latest_products = Product.objects.order_by('-id')[:6]
+        return render(request, 'index.html', {'latest_products': latest_products})
+
+
 class SavedView(LoginRequiredMixin, View):
     def get(self, request):
         user = request.user

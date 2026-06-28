@@ -4,34 +4,28 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from .models import Category, Subcategory, Product, Review
 from .forms import ReviewForm
-
-
-class CategoryListView(View):
-    """Barcha kategoriyalarni ko'rsatadi"""
-    def get(self, request):
-        categories = Category.objects.all()
-        return render(request, 'products/category-list.html', {'categories': categories})
-
-
-class SubcategoryListView(View):
-    """Bitta kategoriyaga tegishli subkategoriyalarni ko'rsatadi"""
-    def get(self, request, category_id):
-        category = get_object_or_404(Category, id=category_id)
-        subcategories = category.subcategories.all()
-        return render(request, 'products/subcategory-list.html', {
-            'category': category,
-            'subcategories': subcategories,
-        })
+from django.db.models import Q
 
 
 class ProductListView(View):
     """Bitta subkategoriyaga tegishli productlarni ko'rsatadi"""
     def get(self, request, subcategory_id):
         subcategory = get_object_or_404(Subcategory, id=subcategory_id)
-        products = subcategory.products.filter(is_active=True)
+        products = subcategory.products.filter(is_active=True).order_by('-id')
         return render(request, 'products/product-list.html', {
             'subcategory': subcategory,
             'products': products,
+        })
+        
+        
+class SupProductListView(View):
+    """Bitta subkategoriyaga tegishli productlarni ko'rsatadi"""
+    def get(self, request, pk):
+        products = Product.objects.filter(subcategory__category=pk).order_by('-id')
+        category = get_object_or_404(Category, pk=pk)
+        return render(request, 'products/sup-product-list.html', {
+            'products': products,
+            'category': category
         })
 
 
@@ -82,3 +76,22 @@ def delete_review(request, pk):
         return redirect(next_page)
     
     return redirect('home')
+
+
+class CategoriesView(View):
+    def get(self, request):
+        products = Product.objects.all().order_by('-id')[:20]
+        return render(request, 'products/categories.html', {'products': products})
+    
+        
+    
+def search(request):
+    
+    query = request.POST.get('search_query')
+        
+    products = Product.objects.filter(Q(name__icontains=query)  | Q(desc__icontains=query))
+    
+    return render(request, 'products/search.html', {'products': products, 'search_query':query})
+    
+        
+        

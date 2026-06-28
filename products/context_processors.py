@@ -4,5 +4,5 @@ from orders.models import Saved
 def categories_processor(request):
     return {
         'categories': Category.objects.prefetch_related('subcategories').all(),
-        'saved_count': Saved.objects.count()
+        'saved_count': Saved.objects.filter(user=request.user).count()
     }

@@ -9,21 +9,17 @@
     <nav class="flex items-center space-x-2 text-xs sm:text-sm text-slate-500 mb-6">
         <a href="/" class="hover:text-brand-600 transition">Home</a>
         <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i>
-        <a href="/products/category/{{ subcategory.category.id }}" class="hover:text-brand-600 transition">
-            {{ subcategory.category.name }}
-        </a>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i>
-        <span class="font-medium text-slate-800">{{ subcategory.name }}</span>
+        <span class="text-slate-400">{{ category.name }}</span>
     </nav>
 
     <!-- Header & Item Counter -->
     <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-100 pb-6 mb-8 gap-4">
         <div>
             <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-                {{ subcategory.name }}
+                {{ category.name }}
             </h1>
             <p class="text-slate-500 mt-2 text-sm sm:text-base">
-                All curated products in the {{ subcategory.category.name }} category.
+                All curated products in the {{ category.name }} category.
             </p>
         </div>
         <div class="inline-flex items-center gap-2 bg-slate-100 text-slate-700 px-3.5 py-1.5 rounded-full text-xs font-semibold self-start md:self-auto">

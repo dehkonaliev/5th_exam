@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to AURA | Premium Curated Lifestyle{% endblock %}
+
+{% block content %}
+<div class="relative overflow-hidden bg-slate-900 text-white py-16 sm:py-24 md:py-32">
+    <!-- Background subtle vector elements -->
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(99,102,241,0.18),transparent_50%)]"></div>
+    <div class="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-brand-600/10 to-transparent hidden lg:block pointer-events-none"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-3xl text-center mx-auto lg:text-left lg:mx-0">
+            <!-- Promo Badge -->
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 text-xs font-semibold tracking-wider uppercase mb-6 border border-brand-500/30 animate-pulse">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                Summer Collection 2026
+            </span>
+            
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none mb-6">
+                Elevate Your Space.<br class="hidden sm:block">
+                <span class="bg-gradient-to-r from-brand-400 to-indigo-300 bg-clip-text text-transparent">Redefine Your Standard.</span>
+            </h1>
+            
+            <p class="text-slate-300 text-base sm:text-lg md:text-xl leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0">
+                Explore a premium curated selection of next-generation electronics, tailored apparel, and timeless accessories crafted to balance elegance and functional superiority.
+            </p>
+            
+            <!-- Hero CTAs -->
+            <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                <a href="#latest-arrivals" class="px-8 py-3.5 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold transition shadow-lg shadow-brand-600/20 hover:shadow-brand-600/30 hover:scale-[1.02] active:scale-95 duration-150 flex items-center gap-2">
+                    <span>Explore New Arrivals</span>
+                    <i data-lucide="arrow-down" class="w-4.5 h-4.5 animate-bounce"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white border-b border-slate-100 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Feature 1 -->
+            <div class="flex items-center gap-4 group">
+                <div class="w-12 h-12 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition duration-300 shadow-sm">
+                    <i data-lucide="truck" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h4 class="font-extrabold text-slate-900 text-sm sm:text-base">Worldwide Delivery</h4>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Free dispatch on all orders over $150</p>
+                </div>
+            </div>
+            <!-- Feature 2 -->
+            <div class="flex items-center gap-4 group">
+                <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition duration-300 shadow-sm">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h4 class="font-extrabold text-slate-900 text-sm sm:text-base">Secure Transactions</h4>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Fully encrypted bank-grade checkout</p>
+                </div>
+            </div>
+            <!-- Feature 3 -->
+            <div class="flex items-center gap-4 group">
+                <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition duration-300 shadow-sm">
+                    <i data-lucide="refresh-cw" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h4 class="font-extrabold text-slate-900 text-sm sm:text-base">30-Day Returns</h4>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Hassle-free shipping and exchanges</p>
+                </div>
+            </div>
+            <!-- Feature 4 -->
+            <div class="flex items-center gap-4 group">
+                <div class="w-12 h-12 bg-pink-50 text-pink-600 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition duration-300 shadow-sm">
+                    <i data-lucide="headphones" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h4 class="font-extrabold text-slate-900 text-sm sm:text-base">Premium Support</h4>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Dedicated 24/7 client care desk</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="latest-arrivals" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    <!-- Section Heading -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-slate-100 pb-6 mb-10 gap-4">
+        <div>
+            <h2 class="text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+                Latest Arrivals
+                <span class="text-xs font-bold bg-brand-100 text-brand-700 px-3 py-1 rounded-full">
+                    Just Dropped
+                </span>
+            </h2>
+            <p class="text-slate-500 mt-2 text-sm sm:text-base">
+                Discover our newest collection updates designed to streamline and refine your day.
+            </p>
+        </div>
+        <a href="{% url 'categories' %}" class="group/link text-sm font-extrabold text-brand-600 hover:text-brand-700 flex items-center gap-1.5 transition">
+            <span>View All Curated Products</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 group-hover/link:translate-x-1 transition duration-150"></i>
+        </a>
+    </div>
+
+    <!-- Dynamic Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for product in latest_products %}
+            <div class="group bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-slate-200/60 transition-all duration-300 flex flex-col overflow-hidden relative">
+                
+                <!-- Product Image / Aspect Square Container -->
+                <div class="aspect-square bg-slate-50/50 relative overflow-hidden flex items-center justify-center border-b border-slate-50">
+                    {% if product.image %}
+                        <img 
+                            src="{{ product.image.url }}" 
+                            class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500" 
+                            alt="{{ product.name }}"
+                            loading="lazy"
+                        >
+                    {% else %}
+                        <div class="flex flex-col items-center justify-center text-slate-300 gap-3">
+                            <i data-lucide="image-off" class="w-12 h-12 opacity-50"></i>
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">No Image Uploaded</span>
+                        </div>
+                    {% endif %}
+
+                    <!-- Stock Badges Overlay -->
+                    {% if product.quantity == 0 %}
+                        <span class="absolute top-4 left-4 bg-red-100 text-red-700 text-[10px] font-bold uppercase px-3 py-1 rounded-full shadow-sm tracking-wider">
+                            Out of stock
+                        </span>
+                    {% elif product.quantity <= 5 %}
+                        <span class="absolute top-4 left-4 bg-amber-100 text-amber-800 text-[10px] font-bold uppercase px-3 py-1 rounded-full shadow-sm tracking-wider animate-pulse">
+                            Limited Edition
+                        </span>
+                    {% endif %}
+
+                    <!-- Category tag inline helper -->
+                    {% if product.subcategory %}
+                    <span class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md text-slate-700 text-[10px] font-bold uppercase px-3 py-1 rounded-lg shadow-sm border border-slate-100/30">
+                        {{ product.subcategory.name }}
+                    </span>
+                    {% endif %}
+                </div>
+
+                <!-- Product Text Details and Price -->
+                <div class="p-6 flex-grow flex flex-col justify-between gap-4">
+                    <div class="space-y-2">
+                        <h3 class="font-extrabold text-slate-900 text-lg line-clamp-2 leading-tight group-hover:text-brand-600 transition duration-150">
+                            {{ product.name }}
+                        </h3>
+                        {% if product.desc %}
+                            <p class="text-xs sm:text-sm text-slate-400 line-clamp-2 leading-relaxed">
+                                {{ product.desc }}
+                            </p>
+                        {% else %}
+                            <p class="text-xs sm:text-sm text-slate-300 italic">
+                                No additional specifications entered.
+                            </p>
+                        {% endif %}
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-50 space-y-4">
+                        <!-- Price layout -->
+                        <div class="flex items-baseline justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Retail Price</span>
+                            <span class="text-xl font-black text-brand-600">
+                                <span class="text-sm font-semibold">$</span>{{ product.price }}
+                            </span>
+                        </div>
+
+                        <!-- Main Details CTA -->
+                        <a 
+                            href="{% url 'product-detail' product.pk %}" 
+                            class="w-full flex items-center justify-center gap-2 bg-slate-950 hover:bg-brand-600 text-white text-sm font-bold py-3 px-5 rounded-2xl transition shadow-sm hover:shadow-brand-500/10 active:scale-[0.99] duration-150"
+                        >
+                            <span>Inspect Product</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition duration-150"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        {% empty %}
+            <div class="col-span-full py-20 px-6 text-center bg-white border border-dashed border-slate-200 rounded-3xl max-w-lg mx-auto shadow-sm">
+                <div class="w-16 h-16 bg-slate-50 text-slate-400 rounded-3xl flex items-center justify-center mx-auto mb-6 border border-slate-100">
+                    <i data-lucide="package-open" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800 mb-1">Catalog items are currently processing</h3>
+                <p class="text-sm text-slate-500 max-w-xs mx-auto mb-6">
+                    Our team is currently editing standard uploads. Please refresh shortly to browse arrivals!
+                </p>
+                <button onclick="window.location.reload()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-950 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition shadow-sm">
+                    <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+                    Refresh Shop
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

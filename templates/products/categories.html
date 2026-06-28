@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block title %}Browse Categories | AURA{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10" 
+     x-data="{ selectedCategory: 'all' }">
+
+    <!-- Breadcrumbs -->
+    <nav class="flex items-center space-x-2 text-xs sm:text-sm text-slate-500 mb-8">
+        <a href="/" class="hover:text-brand-600 transition flex items-center gap-1">
+            <i data-lucide="home" class="w-3.5 h-3.5"></i>
+            Home
+        </a>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i>
+        <span class="font-medium text-slate-800">Browse Categories</span>
+    </nav>
+
+
+
+    
+    <!-- 2. Dynamic Real-Time Explorer Section -->
+    <div id="explore-view" class="border-t border-slate-100 pt-16">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+            <div>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">Featured Explorer</h2>
+                <p class="text-slate-500 mt-1 text-xs sm:text-sm">Filter through our catalog selections dynamically on the fly.</p>
+            </div>
+
+            <!-- Dynamic Alpine Filter Chips -->
+            <div class="flex flex-wrap gap-2 items-center">
+                <button type="reset"
+                    @click="selectedCategory = 'all'"
+                    class="px-4 py-2 text-xs font-bold rounded-xl transition duration-150 border"
+                    :class="selectedCategory === 'all' 
+                        ? 'bg-brand-600 border-brand-600 text-white shadow-md shadow-brand-500/10' 
+                        : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'"
+                >
+                    Show All
+                </button>
+                {% if categories %}
+                    {% for category in categories %}
+                        <button 
+                            @click="selectedCategory = '{{ category.id }}'"
+                            class="px-4 py-2 text-xs font-bold rounded-xl transition duration-150 border"
+                            :class="selectedCategory === '{{ category.id }}' 
+                                ? 'bg-brand-600 border-brand-600 text-white shadow-md shadow-brand-500/10' 
+                                : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'"
+                        >
+                            {{ category.name }}
+                        </button>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Dynamic Grid Container -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {% for product in products %}
+                <div 
+                    x-show="selectedCategory === 'all' || selectedCategory === '{{ product.subcategory.category.id }}'"
+                    x-transition:enter="transition ease-out duration-300 transform"
+                    x-transition:enter-start="opacity-0 scale-95"
+                    x-transition:enter-end="opacity-100 scale-100"
+                    class="group bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden relative"
+                >
+                    
+                    <!-- Aspect Square Image Frame -->
+                    <div class="aspect-square bg-slate-50 relative overflow-hidden flex items-center justify-center border-b border-slate-50">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" class="w-full h-full object-cover group-hover:scale-[1.03] transition duration-500" alt="{{ product.name }}">
+                        {% else %}
+                            <div class="flex flex-col items-center justify-center text-slate-300 gap-2">
+                                <i data-lucide="image-off" class="w-10 h-10 opacity-40"></i>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">No Image available</span>
+                            </div>
+                        {% endif %}
+
+                        <!-- Subcategory Micro Badge -->
+                        {% if product.subcategory %}
+                            <span class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md text-slate-600 text-[10px] font-bold uppercase px-2.5 py-1 rounded-lg border border-slate-100/40 shadow-sm">
+                                {{ product.subcategory.name }}
+                            </span>
+                        {% endif %}
+
+                        <!-- Stock Alerts -->
+                        {% if product.quantity == 0 %}
+                            <span class="absolute top-3 left-3 bg-red-100 text-red-700 text-[10px] font-bold uppercase px-2.5 py-1 rounded-lg tracking-wider">
+                                Out of Stock
+                            </span>
+                        {% elif product.quantity <= 5 %}
+                            <span class="absolute top-3 left-3 bg-amber-50 border border-amber-200 text-amber-800 text-[10px] font-bold uppercase px-2.5 py-1 rounded-lg tracking-wider animate-pulse">
+                                Limited Edition
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Details -->
+                    <div class="p-5 flex-grow flex flex-col justify-between gap-4">
+                        <div class="space-y-1.5">
+                            <h4 class="font-extrabold text-slate-800 text-base line-clamp-2 leading-snug group-hover:text-brand-600 transition">
+                                {{ product.name }}
+                            </h4>
+                            {% if product.desc %}
+                                <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                                    {{ product.desc }}
+                                </p>
+                            {% endif %}
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-50 space-y-4">
+                            <div class="flex items-baseline justify-between">
+                                <span class="text-xs text-slate-400">Retail Price</span>
+                                <span class="text-lg font-black text-brand-600">
+                                    <span class="text-sm font-semibold">$</span>{{ product.price }}
+                                </span>
+                            </div>
+
+                            <a href="{% url 'product-detail' product.pk %}" class="w-full flex items-center justify-center gap-1.5 bg-slate-950 hover:bg-brand-600 text-white text-xs font-bold py-3 rounded-xl transition duration-150">
+                                <span>Inspect Details</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            {% empty %}
+                <div class="col-span-full text-center py-20 px-6 bg-white border border-dashed border-slate-200 rounded-3xl max-w-lg mx-auto shadow-sm">
+                    <div class="w-16 h-16 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-slate-100">
+                        <i data-lucide="package-open" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-1">Our dynamic collection is currently updating</h3>
+                    <p class="text-sm text-slate-500 max-w-xs mx-auto">
+                        Please check back soon while our team aggregates standard stock items!
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

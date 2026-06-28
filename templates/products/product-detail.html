@@ -24,7 +24,9 @@
             Home
         </a>
         <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i>
-        <span class="text-slate-400">{{ product.subcategory.category.name }}</span>
+        <a href="/products/category/{{ product.subcategory.category.id }}" class="hover:text-brand-600 transition">
+            {{ product.subcategory.category.name }}
+        </a>
         <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i>
         <a href="/products/subcategory/{{ product.subcategory.id }}" class="hover:text-brand-600 transition">
             {{ product.subcategory.name }}
