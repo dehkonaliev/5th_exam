@@ -15,7 +15,7 @@ from .forms import LoginForm,  UserUpdateForm, UserForm
 from django.contrib.auth import get_user_model
 
 
-class ProfileView(View):
+class ProfileView(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, 'users/profile.html')
     
@@ -54,3 +54,16 @@ class SignUpView(View):
             login(request, user)
             return redirect('profile')
         return render(request, 'users/signup.html', {'form':form})
+    
+    
+class UserUpdateView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = UserUpdateForm(instance=request.user)
+        return render(request, 'users/update.html', {'form': form})
+
+    def post(self, request):
+        form = UserUpdateForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+        return render(request, 'users/update.html', {'form': form})

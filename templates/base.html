@@ -192,14 +192,14 @@
 
                     <!-- Cart (Dynamic Link) -->
                     {% if request.user.is_authenticated and saved_count > 0 %}
-                        <a href="{% url 'saved' %}"
-                            class="relative p-2 text-slate-600 hover:bg-slate-50 hover:text-brand-600 rounded-lg transition">
-                            <i data-lucide="shopping-cart" class="w-5 h-5"></i>
-                            <span
-                                class="absolute top-1 right-1 bg-brand-600 text-white text-[10px] w-3.5 h-3.5 rounded-full flex items-center justify-center font-bold">
-                                {{saved_count}}
-                            </span>
-                        </a>
+                    <a href="{% url 'saved' %}"
+                        class="relative p-2 text-slate-600 hover:bg-slate-50 hover:text-brand-600 rounded-lg transition">
+                        <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                        <span
+                            class="absolute top-1 right-1 bg-brand-600 text-white text-[10px] w-3.5 h-3.5 rounded-full flex items-center justify-center font-bold">
+                            {{saved_count}}
+                        </span>
+                    </a>
                     {% endif %}
 
                     <!-- User Account / Profile Dropdown -->
@@ -209,7 +209,11 @@
                             <div
                                 class="w-8 h-8 bg-brand-100 text-brand-700 font-bold rounded-full flex items-center justify-center text-xs">
                                 {% if user.is_authenticated %}
-                                {{ user.username|slice:":2"|upper }}
+                                <div
+                                    class="w-8 h-8 bg-brand-100 text-brand-700 font-bold rounded-full flex items-center justify-center text-sm uppercase overflow-hidden">
+                                    <img src="{{request.user.profile_img.url}}" alt=""
+                                        class="w-full h-full object-cover rounded-full">
+                                </div>
                                 {% else %}
                                 <i data-lucide="user" class="w-4 h-4"></i>
                                 {% endif %}
@@ -234,7 +238,7 @@
                             <a href="{% url 'saved' %}"
                                 class="flex items-center gap-2 px-4 py-2 text-slate-600 hover:bg-slate-50 hover:text-brand-600"><i
                                     data-lucide="heart" class="w-4 h-4"></i> Wishlist</a>
-                            <a href="#"
+                            <a href="{% url 'update-profile' %}"
                                 class="flex items-center gap-2 px-4 py-2 text-slate-600 hover:bg-slate-50 hover:text-brand-600"><i
                                     data-lucide="settings" class="w-4 h-4"></i> Settings</a>
                             <div class="border-t border-slate-100 my-1"></div>

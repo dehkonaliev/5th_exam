@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Category, Subcategory, Product, Review
 from .forms import ReviewForm
@@ -66,7 +67,7 @@ class ReviewCreateView(LoginRequiredMixin, View):
         return redirect('product-detail', pk=product.pk)
     
     
-
+@login_required
 def delete_review(request, pk):
     review = get_object_or_404(Review, pk=pk)
     review.delete()

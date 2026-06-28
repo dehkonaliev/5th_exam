@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Profile - NajotForbes{% endblock %}
+
+{% block content %}
+<!-- Main Edit Profile Card Wrapper -->
+<div class="relative w-full max-w-xl mx-auto bg-white/70 backdrop-blur-xl border border-gray-200/80 rounded-3xl p-8 md:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] overflow-hidden my-6">
+    
+    <!-- Subtle back glowing spheres -->
+    <div class="absolute -top-16 -right-16 w-40 h-40 bg-indigo-500/5 rounded-full blur-[50px] pointer-events-none"></div>
+    <div class="absolute -bottom-16 -left-16 w-40 h-40 bg-purple-500/5 rounded-full blur-[50px] pointer-events-none"></div>
+
+    <!-- Form Header Area -->
+    <div class="text-center mb-8 relative z-10">
+        <h2 class="text-2xl md:text-3xl font-extrabold text-gray-950 tracking-tight leading-tight">
+            Update Profile
+        </h2>
+        <p class="text-gray-500 text-xs md:text-sm mt-2 leading-relaxed">
+            Modify your shopping details, contact markers, or profile avatar settings.
+        </p>
+    </div>
+
+    <!-- Internal styling injection to map raw Django form fields to Premium UI -->
+    <style>
+        .premium-update-form p {
+            margin-bottom: 1.5rem;
+        }
+        .premium-update-form label {
+            display: block;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: #4b5563; /* gray-600 */
+            margin-bottom: 0.375rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        /* Styling all generated text, number, and file input fields from Django */
+        .premium-update-form input[type="text"],
+        .premium-update-form input[type="email"],
+        .premium-update-form input[type="number"],
+        .premium-update-form input[type="tel"] {
+            width: 100%;
+            background-color: rgba(249, 250, 251, 0.7); /* gray-50 */
+            border: 1px solid rgba(209, 213, 219, 0.8); /* gray-300 */
+            border-radius: 0.875rem;
+            padding: 0.75rem 1.125rem;
+            color: #111827; /* gray-900 */
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+        }
+        .premium-update-form input[type="text"]:focus,
+        .premium-update-form input[type="email"]:focus,
+        .premium-update-form input[type="number"]:focus,
+        .premium-update-form input[type="tel"]:focus {
+            outline: none;
+            border-color: #4f46e5; /* Indigo focus border */
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+            background-color: #ffffff;
+        }
+        /* Specialized premium look for the user image upload field */
+        .premium-update-form input[type="file"] {
+            display: block;
+            width: 100%;
+            font-size: 0.8125rem;
+            color: #4b5563;
+            background: rgba(249, 250, 251, 0.7);
+            border: 1.5px dashed rgba(209, 213, 219, 1);
+            padding: 0.625rem;
+            border-radius: 0.875rem;
+            cursor: pointer;
+        }
+        /* Style django default validation errors */
+        .premium-update-form .errorlist {
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.15);
+            border-radius: 0.75rem;
+            padding: 0.5rem 1rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #b91c1c;
+            font-size: 0.825rem;
+            list-style-type: none;
+        }
+        /* Help text (ex: layout constraints on pictures or formats) */
+        .premium-update-form .helptext {
+            display: block;
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 0.4rem;
+            line-height: 1.4;
+        }
+    </style>
+
+    <!-- The Update Form (Enctype included to process profile_img uploads) -->
+    <form action="" method="POST" enctype="multipart/form-data" class="premium-update-form relative z-10">
+        {% csrf_token %}
+        
+        <!-- Global Non-Field Errors -->
+        {% if form.non_field_errors %}
+            <div class="bg-red-50 border border-red-200 text-red-600 rounded-xl p-3.5 mb-5 text-sm">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <!-- Raw Django Profile Update Fields -->
+        {{ form.as_p }}
+
+        <!-- Actions Row Layout -->
+        <div class="flex flex-col sm:flex-row items-center gap-3 mt-6">
+            <button type="submit" class="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] transition-all duration-200 shadow-[0_4px_15px_rgba(79,70,229,0.15)] hover:shadow-[0_4px_25px_rgba(79,70,229,0.3)] cursor-pointer">
+                Save Changes
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </button>
+            
+            <a href="{% url 'profile' %}" class="w-full sm:w-auto px-6 py-3.5 rounded-xl text-sm font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 text-center active:scale-[0.98] transition-all duration-200 cursor-pointer">
+                Cancel
+            </a>
+        </div>
+    </form>
+
+</div>
+{% endblock %}
