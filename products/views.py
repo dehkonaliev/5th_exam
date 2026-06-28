@@ -41,9 +41,17 @@ class ProductDetailView(View):
         product = get_object_or_404(Product, pk=pk)
         reviews = product.reviews.all()
         form = ReviewForm()
+        reviewed = request.user in [review.user for review in reviews]
+        user_review_pk = False
+        if reviewed:
+            user_review_pk = [review.pk for review in reviews if review.user == request.user ][0]
+        print(user_review_pk)
+        
         return render(request, 'products/product-detail.html', {
             'product': product,
             'reviews': reviews,
+            'user_reviewed':reviewed,
+            'user_review_pk': user_review_pk,
             'form': form,
         })
 
@@ -62,3 +70,15 @@ class ReviewCreateView(LoginRequiredMixin, View):
         else:
             messages.error(request, "Sharh qo'shishda xatolik yuz berdi.")
         return redirect('product-detail', pk=product.pk)
+    
+    
+
+def delete_review(request, pk):
+    review = get_object_or_404(Review, pk=pk)
+    review.delete()
+    next_page = request.META.get('HTTP_REFERER')
+        
+    if next_page:
+        return redirect(next_page)
+    
+    return redirect('home')

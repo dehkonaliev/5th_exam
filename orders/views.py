@@ -1,15 +1,31 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import Saved, Order, OrderItem
+from products.models import Product
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
+@login_required
+def add_saved(request, pk):
+    user = request.user
+    product = get_object_or_404(Product, pk=pk)
+    quantity = int(request.POST.get('quantity', 1))
+    print(quantity)
+    print(quantity)
+    
+    Saved.objects.create(
+        user=user,
+        product=product,
+        quantity=quantity
+    )
+    
+    return redirect('saved')
 
 class SavedView(LoginRequiredMixin, View):
     def get(self, request):
         user = request.user
         
-        saved_items = Saved.objects.filter(user=user)
+        saved_items = Saved.objects.filter(user=user).order_by('-id')
         
         return render(request, 'orders/order-item.html', {'items':saved_items})
     
@@ -17,7 +33,7 @@ class SavedView(LoginRequiredMixin, View):
         user = request.user
         items = request.POST.getlist('order-item')
         method = request.POST.get('method')
-        saved_items = Saved.objects.filter(user=user)
+        saved_items = Saved.objects.filter(user=user).order_by('-id')
         
         if method == 'Buy':
             order = Order.objects.create(user=user, status='pending')
