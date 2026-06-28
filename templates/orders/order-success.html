@@ -34,6 +34,11 @@
             {% endfor %}
         </ul>
 
+        <form action="{% url 'delete-order' latest_order.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Cancel</button>
+        </form>
+
         <p><strong>Total Charged: ${{ latest_order_total|floatformat:2 }}</strong></p>
     </div>
     {% endif %}
@@ -68,6 +73,11 @@
                     <p><strong>Order Total: ${{ order.get_total_price|floatformat:2 }}</strong></p>
                     <hr style="width: 50%; margin-left: 0;">
                 </li>
+
+                <form action="{% url 'delete-order' order.pk %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit">Cancel</button>
+                </form>
                 {% endif %}
             {% endfor %}
         </ul>
@@ -77,11 +87,6 @@
     </div>
 
     <hr>
-
-    <!-- Call to Action -->
-    <div>
-        <p><a href="/">Continue Shopping</a></p>
-    </div>
 
 </body>
 </html>
