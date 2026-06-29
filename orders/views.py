@@ -63,12 +63,12 @@ class SavedView(LoginRequiredMixin, View):
             
             return redirect('saved')
 
-@login_required
-def delete_saved(reuqest, pk):
-    if reuqest.method == "DELETE":
-        saved = get_object_or_404(Saved, pk=pk)
-        saved.delete()
-        return redirect('saved')
+# @login_required
+# def delete_saved(reuqest, pk):
+#     if reuqest.method == "DELETE":
+#         saved = get_object_or_404(Saved, pk=pk)
+#         saved.delete()
+#         return redirect('saved')
     
     
 class OrderedItemsView(LoginRequiredMixin, View):
@@ -95,8 +95,10 @@ class OrderedItemsView(LoginRequiredMixin, View):
         return render(request, 'orders/order-success.html', context)
     
 @login_required
-def delete_ordered_items(request, pk):
+def cancel_ordered_items(request, pk):
     if request.method == "POST":
         saved = get_object_or_404(Order, pk=pk)
-        saved.delete()
+        
+        saved.status = 'cancelled'
+        saved.save()
         return redirect('order-success')
