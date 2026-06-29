@@ -181,7 +181,7 @@
                                 {% endfor %}
                             </div>
 
-                            {% if item.status == 'pending' %}
+                            {% if order.status == 'pending' %}
                             <form action="{% url 'delete-order' order.pk %}" method="POST" class="pt-2 border-t border-slate-100">
                                 {% csrf_token %}
                                 <button type="submit"
